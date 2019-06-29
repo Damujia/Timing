@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>计时器</title>
+    <style>
+        body{
+            background-color:lightpink;
+            display:flex;
+            /* align-content: center; */
+            align-items: center;
+            justify-content: center;
+            font-size:25px;
+            flex-wrap: wrap;
+        }
+        div{
+            width:100%;
+            display:flex;
+            justify-content: center;
+        }
+        
+        input{
+            width: 10%;
+            height: 50px;
+            border:2px solid rgb(55, 142, 230);
+            background-color:rgba(126, 252, 0, 0.353);
+            display:inline-block;
+            border-radius: 40px;
+            text-align: center;
+            font-size: 25px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div><h1>从那时到现在</h1></div>
+    
+    <input type="text" value=""> 年
+    <input type="text" value=""> 月
+    <input type="text" value=""> 天
+    <input type="text" value=""> 时
+    <input type="text" value=""> 秒
+</body>
+<script>
+    var dat = new Date(2018, 10, 16, 8);
+    var zon = new Date();
+    var mm = zon.getTime();
+    var mm1 = dat.valueOf();
+    var cha = mm - mm1;
+
+    var shijain5 = Math.floor(cha / 1000 / 60 / 60 / 24 / 30 / 12);
+    var shijain = Math.floor(cha / 1000 / 60 / 60 / 24 / 30);
+    var shijain2 = Math.floor(cha / 1000 / 60 / 60 / 24 - shijain * 30);
+    var shijain3 = Math.floor((cha / 1000 / 60 / 60 / 24 - shijain * 30 - shijain2) * 24);
+    var shijain4 = Math.floor(((cha / 1000 / 60 / 60 / 24 - shijain * 30 - shijain2) * 24 - shijain3) * 2600);
+    var inp = document.getElementsByTagName('input')[1];
+    var inp1 = document.getElementsByTagName('input')[2];
+    var inp2 = document.getElementsByTagName('input')[3];
+    var inp3 = document.getElementsByTagName('input')[4];
+    var inp4 = document.getElementsByTagName('input')[0];
+    inp.value = shijain; //月
+    inp1.value = shijain2; //天
+    inp2.value = shijain3; //时
+    inp3.value = shijain4; //秒
+    inp4.value = shijain5; //年
+    // return ("从我表白到现在经过了：" + shijain + "个月" + shijain2 + "天" + shijain3 + "个小时" + shijain4 + "秒");
+    var temi = setInterval(function () {
+        shijain4++;
+        if (shijain4 == 3600) {
+            shijain4 = 0;
+            shijain3++;
+            if (shijain3 == 24) {
+                shijain3 = 0;
+                shijain2++;
+                if (shijain2 == 30) {
+                    shijain2 = 0;
+                    shijain++;
+                    if(shijain == 12) {
+                        shijain = 0;
+                        shijain5 ++;
+                    }
+                }
+            }
+
+        }
+        inp3.value = shijain4;
+        inp2.value = shijain3;
+        inp1.value = shijain2;
+        inp.value = shijain;
+        inp4.value = shijain5;
+    }, 1000);
+    //啊哈哈
+</script>
+
+</html>
